@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 // HALLO HALLO HALLO
+// WAT DENN JUNGE ALTA
 
 
 public class MainActivity extends AppCompatActivity {
