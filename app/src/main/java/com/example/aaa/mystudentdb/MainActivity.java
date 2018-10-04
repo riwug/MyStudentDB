@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         Student student1 = new Student();
         student1.setFirst_name(firstname);
         student1.setLast_name("Wild");
-        student1.setContact("gina@pornsite.com");
+        student1.setContact(firstname + "@pornsite.com");
         return student1;
     }
 
