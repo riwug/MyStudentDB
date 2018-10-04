@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// HALLO HALLO HALLO
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         studentDatabase.studentDao().insertAll(exampleStudent);
 
         printDB();
+
 
     }
 
