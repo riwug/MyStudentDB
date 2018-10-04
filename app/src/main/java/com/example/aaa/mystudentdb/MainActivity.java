@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// HALLO HALLO HALLO
 
 
 public class MainActivity extends AppCompatActivity {
@@ -36,13 +37,14 @@ public class MainActivity extends AppCompatActivity {
 
         printDB();
 
+
     }
 
     protected Student generateSampleStudent(String firstname) {
         Student student1 = new Student();
         student1.setFirst_name(firstname);
         student1.setLast_name("Wild");
-        student1.setContact("gina@pornsite.com");
+        student1.setContact(firstname + "@pornsite.com");
         return student1;
     }
 
