@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 // HALLO HALLO HALLO
-/// Nein NEIN NEIN
+// WAT DENN JUNGE ALTA
+
 
 public class MainActivity extends AppCompatActivity {
 
