@@ -20,6 +20,7 @@ public class BrowseStudents extends AppCompatActivity {
 
     // we set this globar variables only for the OOP color playing
     int BGColor;
+    int studentCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class BrowseStudents extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setTextSize(20);
-        textView.setText("Nr of Entries: " + countStudentsInDatabase());
+        textView.setText("Nr of Entries: " + studentCount);
 
 
         Button closeButton = (Button) findViewById(R.id.btnClose);
@@ -105,6 +106,8 @@ public class BrowseStudents extends AppCompatActivity {
         ArrayList<Student> allStudents = (ArrayList) studentDatabase.studentDao().getAll();
         Iterator<Student> iter = allStudents.iterator();
 
+        studentCount = allStudents.size();
+
         // for displaying the list, we need a String for every row (ArrayAdapter needs a String
         // array)
         String [] studentNamesArray = new String[allStudents.size()];   // important: initialize String array
@@ -117,17 +120,6 @@ public class BrowseStudents extends AppCompatActivity {
         }
         return studentNamesArray;
     }
-
-
-    // just a helper method to get the count of the students in DB - ich bin muede!!!
-    private int countStudentsInDatabase() {
-        ArrayList<Student> allStudents = (ArrayList) studentDatabase.studentDao().getAll();
-        Iterator<Student> iter = allStudents.iterator();
-        int listLength = allStudents.size();
-
-        return listLength;
-    }
-
 
 
     // will create a tableList and pollute it with the Students from the String Array produced
