@@ -33,7 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     def arch_version = "1.1.0"
-    implementation  "android.arch.persistence.room:runtime:$arch_version"
+    implementation "android.arch.persistence.room:runtime:$arch_version"
     annotationProcessor "android.arch.persistence.room:compiler:$arch_version"
     implementation "android.arch.persistence.room:rxjava2:$arch_version"
     implementation "android.arch.persistence.room:common:$arch_version"
