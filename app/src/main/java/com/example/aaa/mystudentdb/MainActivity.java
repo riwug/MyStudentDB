@@ -17,7 +17,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    private StudentDatabase studentDatabase;
+    //private StudentDatabase studentDatabase;
     Button btnBrowseStudents;
 
     @Override
@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void printDB() {
+
+/*    private void printDB() {
         ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
         Iterator<Student> iter = allData.iterator();
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+*/
 
     public void btnBrowseStudentsClicked() {
         Intent intent = new Intent(this, BrowseStudents.class);
