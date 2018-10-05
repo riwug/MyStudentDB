@@ -35,7 +35,7 @@ public class BrowseStudents extends AppCompatActivity {
         while (iter.hasNext()) {
             System.out.println("element added");
             Student stud = iter.next();
-            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name());
+            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name() + " " + stud.getTimestampOnCreate());
             count++;
         }
 
@@ -44,9 +44,7 @@ public class BrowseStudents extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, studentNamesArray);
 
         ListView studentListView = (ListView) findViewById(R.id.studentListView);
-        System.out.println("out of loop ++++++++++++");
         studentListView.setAdapter(adapter);
-        System.out.println("out of loop ++++++++++++");
 
         Button closeButton = (Button) findViewById(R.id.btnClose);
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -72,11 +70,19 @@ public class BrowseStudents extends AppCompatActivity {
         studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
+
+    private String timestampOnCreate() {
+        Long tsLong = System.currentTimeMillis()/1000;
+        return tsLong.toString();
+    }
+
+
     protected Student generateSampleStudent(String firstname) {
         Student student1 = new Student();
         student1.setFirst_name(firstname);
         student1.setLast_name("Wild");
         student1.setContact(firstname + "@pornsite.com");
+        student1.setTimestampOnCreate(timestampOnCreate());
         return student1;
     }
 }

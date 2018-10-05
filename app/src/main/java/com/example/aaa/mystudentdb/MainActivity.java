@@ -48,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected Student generateSampleStudent(String firstname) {
-        Student student1 = new Student();
-        student1.setFirst_name(firstname);
-        student1.setLast_name("Wild");
-        student1.setContact(firstname + "@pornsite.com");
-        return student1;
-    }
-
     private void printDB() {
         ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
         Iterator<Student> iter = allData.iterator();

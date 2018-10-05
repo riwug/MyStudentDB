@@ -19,6 +19,10 @@ public class Student {
     @ColumnInfo(name = "contact")
     private String contact;
 
+    @ColumnInfo(name = "timestampOnCreate")
+    private String timestampOnCreate;
+
+
     /* add these later
     @ColumnInfo(name = "personalinfo")
     private String personalinfo;
@@ -66,6 +70,26 @@ public class Student {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    public String getTimestampOnCreate() {
+        return timestampOnCreate;
+    }
+
+    public void setTimestampOnCreate(String timestampOnCreate) {
+        this.timestampOnCreate = timestampOnCreate;
+    }
+
+    /*
+    public String getTimestampOnCreate() {
+        return timestampOnCreate;
+    }
+
+    // Create a timestamp to write into to db that is more conceivable that all entries
+    // are different whereas they all look the same
+    public void setTimestampOnCreate(String timestampOnCreate) {
+        this.timestampOnCreate = timestampOnCreate;
+        }
+*/
 
     /* add these later
     public String getPersonalinfo() {
