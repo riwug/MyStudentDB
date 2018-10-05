@@ -1,20 +1,24 @@
 package com.example.aaa.mystudentdb;
 
 import android.arch.persistence.room.Room;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-// HALLO HALLO HALLO
-// WAT DENN JUNGE ALTA
+import android.view.View.OnClickListener;
+import android.widget.EditText;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private StudentDatabase studentDatabase;
+    Button btnBrowseStudents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,23 +26,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        studentDatabase = Room.databaseBuilder(getApplicationContext(),
-                StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
+        this.setTitle("My Student Database");
+
+        //studentDatabase = Room.databaseBuilder(getApplicationContext(),
+                //StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
 
         // find specific student
         //System.out.println(studentDatabase.studentDao().findByName("Hans", "Schnejder").getContact() );
 
-        // some sample data for testing the database
-        Student exampleStudent = generateSampleStudent("Gina");
-        studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Egon");
-        studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Armin");
-        studentDatabase.studentDao().insertAll(exampleStudent);
-
-        printDB();
 
 
+
+
+        // Button important: instantiate with new before creating Listener!!!
+        btnBrowseStudents = (Button) findViewById(R.id.btnBrowseStudents);
+        btnBrowseStudents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnBrowseStudentsClicked();
+            }
+        });
     }
 
     protected Student generateSampleStudent(String firstname) {
@@ -63,5 +70,10 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("*** *** *** ***");
         }
 
+    }
+
+    public void btnBrowseStudentsClicked() {
+        Intent intent = new Intent(this, BrowseStudents.class);
+        startActivity(intent);
     }
 }
