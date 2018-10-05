@@ -17,8 +17,9 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private StudentDatabase studentDatabase;
+    private StudentDatabase studentDatabase;
     Button btnBrowseStudents;
+    Button btnBrowseStudents2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.setTitle("My Student Database");
 
-        //studentDatabase = Room.databaseBuilder(getApplicationContext(),
-                //StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
-
-        // find specific student
-        //System.out.println(studentDatabase.studentDao().findByName("Hans", "Schnejder").getContact() );
-
-
-
-
-
+        // Button1 Standard
         // Button important: instantiate with new before creating Listener!!!
         btnBrowseStudents = (Button) findViewById(R.id.btnBrowseStudents);
         btnBrowseStudents.setOnClickListener(new View.OnClickListener() {
@@ -46,10 +38,21 @@ public class MainActivity extends AppCompatActivity {
                 btnBrowseStudentsClicked();
             }
         });
+
+        // Button2 Funky
+        // Button important: instantiate with new before creating Listener!!!
+        btnBrowseStudents2 = (Button) findViewById(R.id.btnBrowseStudents2);
+        btnBrowseStudents2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnBrowseStudentsClickedFunky();
+            }
+        });
+
+
     }
 
-
-/*    private void printDB() {
+    private void printDB() {
         ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
         Iterator<Student> iter = allData.iterator();
 
@@ -64,10 +67,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-*/
 
+    // Button1 Standard
     public void btnBrowseStudentsClicked() {
-        Intent intent = new Intent(this, BrowseStudents.class);
+        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
+        String Sendung = "stdView";
+        intent.putExtra("Sendung", Sendung);
         startActivity(intent);
     }
+
+    // Button2 Funky
+    public void btnBrowseStudentsClickedFunky() {
+        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
+        String Sendung = "funkyView";
+        intent.putExtra("Sendung", Sendung);
+        startActivity(intent);
+
+    }
+
 }
