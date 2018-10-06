@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // putExtra will send additional data to the intent (view)
     // Button1 Standard
     public void btnBrowseStudentsClicked() {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // putExtra will send additional data to the intent (view)
     // Button2 Funky
     public void btnBrowseStudentsClickedFunky() {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
