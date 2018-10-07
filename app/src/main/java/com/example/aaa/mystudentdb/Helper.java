@@ -2,17 +2,44 @@ package com.example.aaa.mystudentdb;
 
 
 import android.arch.persistence.room.Room;
-import android.support.v7.app.AppCompatActivity;
 
+/**
+ *  Helper class for instantiating the database with test data and... other stuff
+ *
+ *  This is a Singleton, so we make the constructor private. Other classes only can get the helper object by calling
+ *  the method getInstance().
+ *
+ * @author arm
+ * @author ric
+ */
 
-public class Helper  extends AppCompatActivity {
+public class Helper
+{
 
-    public String timestampOnCreate() {
+    private static Helper instance = null;
+    /**
+     * In a Singleton, the constructor is private.
+     */
+    private Helper() {}
+
+    public static Helper getInstance()
+    {
+        if (instance != null)
+            return instance;
+        else {
+            instance = new Helper();
+            return instance;
+        }
+    }
+
+    public String timestampOnCreate()
+    {
         Long tsLong = System.currentTimeMillis()/1000;
         return tsLong.toString();
     }
 
-    protected Student generateSampleStudent(String firstname) {
+    protected Student generateSampleStudent(String firstname)
+    {
         Student student1 = new Student();
         student1.setFirst_name(firstname);
         student1.setLast_name("Wild");
@@ -22,7 +49,7 @@ public class Helper  extends AppCompatActivity {
     }
 
 /*
-        for(int l=0; l<=500; l++){
+        for(int l=0; l<=500; l++) {
             System.out.println(variable);
         }
         */

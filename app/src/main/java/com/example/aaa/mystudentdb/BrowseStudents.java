@@ -22,15 +22,18 @@ import java.util.Iterator;
 public class BrowseStudents extends AppCompatActivity {
 
     private StudentDatabase studentDatabase;
-    private Helper helper = new Helper();
 
     // we set this globar variables only for the OOP color playing
     int BGColor;
     int studentCount;
+    private Helper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("+++ test +++ test +++ test +++");
+        helper = Helper.getInstance();
+
 
         // just to play OOP to get a value from the button from the previous view
         // and set a layout variable by this value
@@ -58,16 +61,12 @@ public class BrowseStudents extends AppCompatActivity {
         // total crazy, es ist super wichtig bei if else, dass man die Klammern an die richtigen Stellen macht!
         if (newString.equals("stdView") ) {
             BGColor = -1;
-        } else if (newString.equals("funkyView")){
+        } else if (newString.equals("funkyView")) {
             BGColor = -256;
         };
 
         setContentView(R.layout.activity_browse_students);
         this.setTitle("Browse students");
-
-
-
-
 
         initDatabase();
 
@@ -79,7 +78,6 @@ public class BrowseStudents extends AppCompatActivity {
         textView.setTextSize(20);
         textView.setText("Nr of Entries: " + studentCount);
 
-
         Button closeButton = (Button) findViewById(R.id.btnClose);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,26 +85,19 @@ public class BrowseStudents extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
-
 
     private void initDatabase() {
         studentDatabase = Room.databaseBuilder(getApplicationContext(),
                 StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
     }
 
-    /**
-     *
-     */
 // cant move this one to helper...! Think problem is with the studentDatabase!
     private void writeFirstStudentsToDatabase(){
         Student exampleStudent = helper.generateSampleStudent("Erster");
         studentDatabase.studentDao().insertAll(exampleStudent);
         exampleStudent = helper.generateSampleStudent("Zweiter");
         studentDatabase.studentDao().insertAll(exampleStudent);
-
     }
 
 
@@ -144,11 +135,4 @@ public class BrowseStudents extends AppCompatActivity {
 
         studentListView.setAdapter(adapter);
     }
-
-
-
-
-
-
-
 }

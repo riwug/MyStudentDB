@@ -22,17 +22,23 @@ import android.widget.EditText;
  *  <br> friendly greetings from the developers
  *  <br><img alt="image desc" src="ARP_logo_small.jpg">
  *
+ *      New coding principle applied with ' { ' , see https://gitlab.com/riwug/wikitest/wikis/Coding-conventions
+ *
  * @author ric
  * @author arm
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
 
     private StudentDatabase studentDatabase;
     Button btnBrowseStudents;
     Button btnBrowseStudents2;
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -42,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
         // Button1 Standard
         // Button important: instantiate with new before creating Listener!!!
         btnBrowseStudents = (Button) findViewById(R.id.btnBrowseStudents);
-        btnBrowseStudents.setOnClickListener(new View.OnClickListener() {
+        btnBrowseStudents.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 btnBrowseStudentsClicked();
             }
         });
@@ -52,18 +60,19 @@ public class MainActivity extends AppCompatActivity {
         // Button2 Funky
         // Button important: instantiate with new before creating Listener!!!
         btnBrowseStudents2 = (Button) findViewById(R.id.btnBrowseStudents2);
-        btnBrowseStudents2.setOnClickListener(new View.OnClickListener() {
+        btnBrowseStudents2.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 btnBrowseStudentsClickedFunky();
             }
         });
-
-
     }
 
 
-    private void printDB() {
+    private void printDB()
+    {
         ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
         Iterator<Student> iter = allData.iterator();
 
@@ -81,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     // putExtra will send additional data to the intent (view)
     // Button1 Standard
-    public void btnBrowseStudentsClicked() {
+    public void btnBrowseStudentsClicked()
+    {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
         String Sendung = "stdView";
         intent.putExtra("Sendung", Sendung);
@@ -90,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
     // putExtra will send additional data to the intent (view)
     // Button2 Funky
-    public void btnBrowseStudentsClickedFunky() {
+    public void btnBrowseStudentsClickedFunky()
+    {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
         String Sendung = "funkyView";
         intent.putExtra("Sendung", Sendung);
