@@ -13,6 +13,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
+/**
+ * Activity just for browsing through students and choosing by clicking one to view / edit.
+ *
+ * @author ric
+ * @author arm
+ */
 public class BrowseStudents extends AppCompatActivity {
 
     private StudentDatabase studentDatabase;
@@ -91,6 +97,9 @@ public class BrowseStudents extends AppCompatActivity {
                 StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
     }
 
+    /**
+     *
+     */
 // cant move this one to helper...! Think problem is with the studentDatabase!
     private void writeFirstStudentsToDatabase(){
         Student exampleStudent = helper.generateSampleStudent("Erster");
