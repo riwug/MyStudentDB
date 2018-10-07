@@ -21,7 +21,7 @@ import java.util.Iterator;
  */
 public class BrowseStudents extends AppCompatActivity {
 
-    private StudentDatabase studentDatabase;
+    //private StudentDatabase studentDatabase;
 
     // we set this globar variables only for the OOP color playing
     int BGColor;
@@ -32,8 +32,7 @@ public class BrowseStudents extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         System.out.println("+++ test +++ test +++ test +++");
-        helper = Helper.getInstance();
-
+        helper = Helper.getInstance(this.getApplicationContext());
 
         // just to play OOP to get a value from the button from the previous view
         // and set a layout variable by this value
@@ -68,10 +67,6 @@ public class BrowseStudents extends AppCompatActivity {
         setContentView(R.layout.activity_browse_students);
         this.setTitle("Browse students");
 
-        initDatabase();
-
-        writeFirstStudentsToDatabase();
-
         showStudentListAsTable(); // uses external method readStudentsFromDatabase
 
         TextView textView = (TextView) findViewById(R.id.textView);
@@ -86,24 +81,25 @@ public class BrowseStudents extends AppCompatActivity {
             }
         });
     }
+    
 
-    private void initDatabase() {
-        studentDatabase = Room.databaseBuilder(getApplicationContext(),
-                StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
+    // will create a tableList and pollute it with the Students from the String Array produced
+    // by readStudentsFromDatabase
+    private void showStudentListAsTable() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, readStudentsFromDatabase());
+
+        ListView studentListView = (ListView) findViewById(R.id.studentListView);
+
+        // https://developer.android.com/reference/android/graphics/Color
+        studentListView.setBackgroundColor(BGColor);
+
+        studentListView.setAdapter(adapter);
     }
-
-// cant move this one to helper...! Think problem is with the studentDatabase!
-    private void writeFirstStudentsToDatabase(){
-        Student exampleStudent = helper.generateSampleStudent("Erster");
-        studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = helper.generateSampleStudent("Zweiter");
-        studentDatabase.studentDao().insertAll(exampleStudent);
-    }
-
 
     // will create an String Array with all Students in the DB
     private String[] readStudentsFromDatabase() {
-        ArrayList<Student> allStudents = (ArrayList) studentDatabase.studentDao().getAll();
+        ArrayList<Student> allStudents = helper.getStudentList();
         Iterator<Student> iter = allStudents.iterator();
 
         studentCount = allStudents.size();
@@ -119,20 +115,5 @@ public class BrowseStudents extends AppCompatActivity {
             count++;
         }
         return studentNamesArray;
-    }
-
-
-    // will create a tableList and pollute it with the Students from the String Array produced
-    // by readStudentsFromDatabase
-    private void showStudentListAsTable() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, readStudentsFromDatabase());
-
-        ListView studentListView = (ListView) findViewById(R.id.studentListView);
-
-        // https://developer.android.com/reference/android/graphics/Color
-        studentListView.setBackgroundColor(BGColor);
-
-        studentListView.setAdapter(adapter);
     }
 }

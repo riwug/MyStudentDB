@@ -2,6 +2,9 @@ package com.example.aaa.mystudentdb;
 
 
 import android.arch.persistence.room.Room;
+import android.content.Context;
+
+import java.util.ArrayList;
 
 /**
  *  Helper class for instantiating the database with test data and... other stuff
@@ -20,16 +23,42 @@ public class Helper
     /**
      * In a Singleton, the constructor is private.
      */
-    private Helper() {}
 
-    public static Helper getInstance()
+    private Context context;
+    private StudentDatabase studentDatabase;
+
+    private Helper(Context context) {
+        this.context = context;
+        initDatabase();
+    }
+
+    public static Helper getInstance(Context context)
     {
         if (instance != null)
             return instance;
         else {
-            instance = new Helper();
+            instance = new Helper(context);
             return instance;
         }
+    }
+
+    // init database
+    private void initDatabase() {
+        studentDatabase = Room.databaseBuilder(context,
+                StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
+        writeSampleStudentsToDatabase();
+    }
+
+    private void writeSampleStudentsToDatabase(){
+        Student exampleStudent = generateSampleStudent("Erster");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Zweiter");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+    }
+
+    public ArrayList<Student> getStudentList()
+    {
+        return (ArrayList) studentDatabase.studentDao().getAll();
     }
 
     public String timestampOnCreate()
@@ -38,6 +67,11 @@ public class Helper
         return tsLong.toString();
     }
 
+    /**
+     *
+     * @param firstname First name of the new Student instance
+     * @return returns a new Student object
+     */
     protected Student generateSampleStudent(String firstname)
     {
         Student student1 = new Student();
