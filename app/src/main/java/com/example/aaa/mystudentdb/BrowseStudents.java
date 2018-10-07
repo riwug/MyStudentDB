@@ -81,7 +81,7 @@ public class BrowseStudents extends AppCompatActivity {
             }
         });
     }
-    
+
 
     // will create a tableList and pollute it with the Students from the String Array produced
     // by readStudentsFromDatabase

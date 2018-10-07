@@ -46,7 +46,9 @@ public class Helper
     private void initDatabase() {
         studentDatabase = Room.databaseBuilder(context,
                 StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
-        writeSampleStudentsToDatabase();
+
+        if (studentDatabase.studentDao().getAll().size() == 0)
+            writeSampleStudentsToDatabase();
     }
 
     private void writeSampleStudentsToDatabase(){
