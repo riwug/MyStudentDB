@@ -15,6 +15,16 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 
+/**
+ * Main / initial activity of the application. Contains also main method.
+ *
+ *  <br>
+ *  <br> friendly greetings from the developers
+ *  <br><img alt="image desc" src="ARP_logo_small.jpg">
+ *
+ * @author ric
+ * @author arm
+ */
 public class MainActivity extends AppCompatActivity {
 
     private StudentDatabase studentDatabase;
@@ -51,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     private void printDB() {
         ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
