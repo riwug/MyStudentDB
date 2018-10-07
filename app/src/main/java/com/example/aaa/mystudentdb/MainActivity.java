@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity
     Button btnBrowseStudents2;
     private Helper helper;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -45,7 +44,6 @@ public class MainActivity extends AppCompatActivity
 
         // init helper-Class
         helper = helper.getInstance(this.getApplicationContext());
-
 
         // Button1 Standard
         // Button important: instantiate with new before creating Listener!!!
@@ -71,26 +69,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
-
-
-    /*
-    private void printDB()
-    {
-        ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
-        Iterator<Student> iter = allData.iterator();
-
-        while (iter.hasNext()) {
-            Student stud = iter.next();
-            System.out.println("*** *** *** ***");
-            System.out.println("*** " + stud.getId() + " ***");
-            System.out.println("*** " + stud.getFirst_name() + " ***");
-            System.out.println("*** " + stud.getLast_name() + " ***");
-            System.out.println("*** " + stud.getContact() + " ***");
-            System.out.println("*** *** *** ***");
-        }
-    } */
-
     // putExtra will send additional data to the intent (view)
     // Button1 Standard
     public void btnBrowseStudentsClicked()
@@ -112,4 +90,20 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /*
+    private void printDB()
+    {
+        ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
+        Iterator<Student> iter = allData.iterator();
+
+        while (iter.hasNext()) {
+            Student stud = iter.next();
+            System.out.println("*** *** *** ***");
+            System.out.println("*** " + stud.getId() + " ***");
+            System.out.println("*** " + stud.getFirst_name() + " ***");
+            System.out.println("*** " + stud.getLast_name() + " ***");
+            System.out.println("*** " + stud.getContact() + " ***");
+            System.out.println("*** *** *** ***");
+        }
+    } */
 }

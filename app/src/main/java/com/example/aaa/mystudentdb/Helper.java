@@ -20,13 +20,13 @@ public class Helper
 {
 
     private static Helper instance = null;
-    /**
-     * In a Singleton, the constructor is private.
-     */
 
     private Context context;
     private StudentDatabase studentDatabase;
 
+    /**
+     * In a Singleton, the constructor is private.
+     */
     private Helper(Context context) {
         this.context = context;
         initDatabase();

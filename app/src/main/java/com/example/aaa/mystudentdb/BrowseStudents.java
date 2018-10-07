@@ -16,10 +16,18 @@ import java.util.Iterator;
 /**
  * Activity just for browsing through students and choosing by clicking one to view / edit.
  *
+ *  just to play OOP to get a value from the button from the previous view
+ *  and set a layout variable by this value
+ *  in the function showStudentListAsTable on BGColor the color of the BG of the list can be set
+ *  when we click the upper button on the previous view it will send the str "stdView" to this view
+ *  when we click the lower button on the previous view it will send the str "funkyView" to this view
+ *  we read the value from "Bundle savedInstanceState" and set the color accordingly to the right color
+ *
  * @author ric
  * @author arm
  */
-public class BrowseStudents extends AppCompatActivity {
+public class BrowseStudents extends AppCompatActivity
+{
 
     //private StudentDatabase studentDatabase;
 
@@ -29,21 +37,11 @@ public class BrowseStudents extends AppCompatActivity {
     private Helper helper;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         System.out.println("+++ test +++ test +++ test +++");
         helper = Helper.getInstance(this.getApplicationContext());
-
-        // just to play OOP to get a value from the button from the previous view
-        // and set a layout variable by this value
-        // in the function showStudentListAsTable on BGColor the color of the BG of the list
-        // can be set
-        // when we click the upper button on the previous view it will send the str "stdView" to
-        // this view
-        // when we click the lower button on the previous view it will send the str "funkyView" to
-        // this view
-        // we read the value from "Bundle savedInstanceState"
-        // and set the color accordingly to the right color
 
         String newString;
         if (savedInstanceState == null) {
@@ -85,20 +83,20 @@ public class BrowseStudents extends AppCompatActivity {
 
     // will create a tableList and pollute it with the Students from the String Array produced
     // by readStudentsFromDatabase
-    private void showStudentListAsTable() {
+    private void showStudentListAsTable()
+    {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, readStudentsFromDatabase());
 
         ListView studentListView = (ListView) findViewById(R.id.studentListView);
-
         // https://developer.android.com/reference/android/graphics/Color
         studentListView.setBackgroundColor(BGColor);
-
         studentListView.setAdapter(adapter);
     }
 
     // will create an String Array with all Students in the DB
-    private String[] readStudentsFromDatabase() {
+    private String[] readStudentsFromDatabase()
+    {
         ArrayList<Student> allStudents = helper.getStudentList();
         Iterator<Student> iter = allStudents.iterator();
 
