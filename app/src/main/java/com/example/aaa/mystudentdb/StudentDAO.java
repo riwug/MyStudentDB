@@ -8,7 +8,8 @@ import android.arch.persistence.room.Query;
 import java.util.List;
 
 @Dao
-public interface StudentDAO {
+public interface StudentDAO
+{
     @Query("SELECT * FROM Student")
     List<Student> getAll();
 
