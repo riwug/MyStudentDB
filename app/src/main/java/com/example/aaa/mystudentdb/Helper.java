@@ -42,12 +42,17 @@ public class Helper
         }
     }
 
+    public StudentDAO getStudentDAO()
+    {
+        return studentDatabase.studentDao();
+    }
+
     // init database
     private void initDatabase() {
         studentDatabase = Room.databaseBuilder(context,
                 StudentDatabase.class, "studentDB").allowMainThreadQueries().build();
 
-        if (studentDatabase.studentDao().getAll().size() == 0)
+        if (studentDatabase.studentDao().getAll().size() == 0) // if database is empty, write sample data
             writeSampleStudentsToDatabase();
     }
 
@@ -79,7 +84,7 @@ public class Helper
         Student student1 = new Student();
         student1.setFirst_name(firstname);
         student1.setLast_name("Wild");
-        student1.setContact(firstname + "@pornsite.com");
+        student1.setContact(firstname + "@site.com");
         student1.setTimestampOnCreate(timestampOnCreate());
         return student1;
     }
