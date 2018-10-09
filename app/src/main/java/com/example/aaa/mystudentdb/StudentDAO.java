@@ -19,9 +19,6 @@ public interface StudentDAO
     @Query("SELECT * FROM Student WHERE first_name LIKE :first")
     List<Student> findByFirstName(String first);
 
-    //@Query("SELECT * FROM Student WHERE first_name LIKE :first LIMIT 1")
-    //List<Student> findByFirstName(String first);
-
     @Query("SELECT * FROM Student WHERE first_name LIKE :first AND "+ "last_name LIKE :last LIMIT 1")
     Student findByName(String first, String last);
 

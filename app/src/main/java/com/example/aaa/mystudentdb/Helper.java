@@ -56,7 +56,8 @@ public class Helper
             writeSampleStudentsToDatabase();
     }
 
-    private void writeSampleStudentsToDatabase(){
+    private void writeSampleStudentsToDatabase()
+    {
         Student exampleStudent = generateSampleStudent("Erster");
         studentDatabase.studentDao().insertAll(exampleStudent);
         exampleStudent = generateSampleStudent("Zweiter");
@@ -64,6 +65,8 @@ public class Helper
         exampleStudent = generateSampleStudent("Riwu");
         studentDatabase.studentDao().insertAll(exampleStudent);
         exampleStudent = generateSampleStudent("Armin");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Minion");
         studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
@@ -75,10 +78,13 @@ public class Helper
 
     // will get "student" with ID
     public ArrayList<Student> getSearchResultForFirstName(String first)
-    {
-        return (ArrayList) studentDatabase.studentDao().findByFirstName(first);
-    }
-
+        {
+        if (((ArrayList) studentDatabase.studentDao().findByFirstName(first)).size() == 0) {
+            return null;
+        } else {
+            return (ArrayList) studentDatabase.studentDao().findByFirstName(first);
+        }
+        }
 
     public String timestampOnCreate()
     {

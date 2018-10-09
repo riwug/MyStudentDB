@@ -91,23 +91,33 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                // for checking in search returned students
-                // ArrayList<Student> allStudents = new ArrayList<Student>();
-                //allStudents = helper.getSearchResultForFirstName(searchedFirstname);
-
                 String searchedFirstname = (mEdit.getText().toString());
                 searchedFirstname = ("%" + searchedFirstname + "%");
+
+                if (mEdit.getText().toString().length() > 0){
+                // for checking in search returned students
+                    ArrayList<Student> allStudents = new ArrayList<Student>();
+                    allStudents = helper.getSearchResultForFirstName(searchedFirstname);
+
+                    if (allStudents == null){
+                        textFieldResult.setText("no result:");
+                    }
+
+                    else {
+                        btnBrowseStudentsClickedSearchForID((searchedFirstname));
+                    }
+
+                } else {
+                    textFieldResult.setText("please enter search term:");
+                }
+
 
                 // toDo
                 // habe jetzt hier 2 stunden verbraucht um unterschiedliche Messages an den User zu bringen
                 // abhängig was in den Feldern steht etc... AHHHHHHHHHH
                 // hat nicht geklappt
 
-                if (mEdit.getText().toString().equals("")){
-                    mEdit.setText("Enter Firstname:");
-                } else {
-                    btnBrowseStudentsClickedSearchForID((searchedFirstname));
-                }
+
 
                 /*if (allStudents.size()==0){
                     textFieldResult.setText("Fuck YOU");
@@ -171,23 +181,4 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
 
     }
-
-
-
-    /*
-    private void printDB()
-    {
-        ArrayList<Student> allData = (ArrayList) studentDatabase.studentDao().getAll();
-        Iterator<Student> iter = allData.iterator();
-
-        while (iter.hasNext()) {
-            Student stud = iter.next();
-            System.out.println("*** *** *** ***");
-            System.out.println("*** " + stud.getId() + " ***");
-            System.out.println("*** " + stud.getFirst_name() + " ***");
-            System.out.println("*** " + stud.getLast_name() + " ***");
-            System.out.println("*** " + stud.getContact() + " ***");
-            System.out.println("*** *** *** ***");
-        }
-    } */
 }
