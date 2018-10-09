@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.view.KeyEvent;
+import android.util.Log;
+
 
 import java.util.List;
 import java.util.ArrayList;
@@ -31,6 +34,9 @@ public class MainActivity extends AppCompatActivity
 {
     Button btnBrowseStudents;
     Button btnBrowseStudents2;
+    Button btnSearch;
+    EditText mEdit;
+
     private Helper helper;
 
     @Override
@@ -68,13 +74,41 @@ public class MainActivity extends AppCompatActivity
                 btnBrowseStudentsClickedFunky();
             }
         });
+
+        // Search Button
+        // Button important: instantiate with new before creating Listener!!!
+
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnSearch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
+                btnBrowseStudentsClickedSearchForID();
+
+            }
+        });
+
+        // init text of editTextField
+        mEdit   = (EditText)findViewById(R.id.fieldEditText);
+        mEdit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mEdit.setText("");
+            }
+        });
+
+
     }
     // putExtra will send additional data to the intent (view)
     // Button1 Standard
     public void btnBrowseStudentsClicked()
     {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String Sendung = "stdView";
+        String  [] Sendung = {"stdView","empty"};
         intent.putExtra("Sendung", Sendung);
         startActivity(intent);
     }
@@ -84,11 +118,30 @@ public class MainActivity extends AppCompatActivity
     public void btnBrowseStudentsClickedFunky()
     {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String Sendung = "funkyView";
+        String  [] Sendung = {"funkyView","empty"};
         intent.putExtra("Sendung", Sendung);
         startActivity(intent);
 
     }
+
+    // putExtra will send additional data to the intent (view)
+    // Search Button in Std View
+    public void btnBrowseStudentsClickedSearchForID()
+    {
+        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
+        String searchedFirstname = mEdit.getText().toString();
+        if (mEdit.getText().toString().matches("") | mEdit.getText().toString().matches("Enter text first")){
+            mEdit.setText("Enter text first");
+            System.out.println("nothing, add message to enter text");
+        } else {
+            searchedFirstname = ("%" + searchedFirstname + "%"); // need to add %xxx% to find similar firstnames that contain searchterm
+            String[] Sendung = {"IDSearch", searchedFirstname};
+            intent.putExtra("Sendung", Sendung);
+            startActivity(intent);
+        }
+    }
+
+
 
     /*
     private void printDB()

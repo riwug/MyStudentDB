@@ -57,16 +57,24 @@ public class Helper
     }
 
     private void writeSampleStudentsToDatabase(){
-        Student exampleStudent = generateSampleStudent("Erster");
+        Student exampleStudent = generateSampleStudent("Armin");
         studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Zweiter");
+        exampleStudent = generateSampleStudent("Riwu");
         studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
+    // will get "all students"
     public ArrayList<Student> getStudentList()
     {
         return (ArrayList) studentDatabase.studentDao().getAll();
     }
+
+    // will get "student" with ID
+    public ArrayList<Student> getSearchResultForFirstName(String first)
+    {
+        return (ArrayList) studentDatabase.studentDao().findByFirstName(first);
+    }
+
 
     public String timestampOnCreate()
     {

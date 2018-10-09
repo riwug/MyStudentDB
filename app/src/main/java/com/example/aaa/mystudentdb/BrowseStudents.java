@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -38,6 +39,7 @@ public class BrowseStudents extends AppCompatActivity
     // we set this globar variables only for the OOP color playing
     int BGColor;
     int studentCount;
+    String [] newString; // wanted to use this string in an cause for search view
     private Helper helper;
     private ListView studentListView;
     // map to store firstname,lastname. Enables us to make a unique query if a student is selected from list
@@ -49,22 +51,22 @@ public class BrowseStudents extends AppCompatActivity
         super.onCreate(savedInstanceState);
         helper = Helper.getInstance(this.getApplicationContext());
 
-        String newString;
+        // String newString;
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
                 newString = null;
             } else {
-                newString = extras.getString("Sendung");
+                newString = extras.getStringArray("Sendung");
             }
         } else {
-            newString = (String) savedInstanceState.getSerializable("Sendung");
+            newString = (String []) savedInstanceState.getSerializable("Sendung");
         }
 
         // total crazy, es ist super wichtig bei if else, dass man die Klammern an die richtigen Stellen macht!
-        if (newString.equals("stdView") ) {
+        if (newString[0].equals("stdView") ) {
             BGColor = -1;
-        } else if (newString.equals("funkyView")) {
+        } else if (newString[0].equals("funkyView")) {
             BGColor = -256;
         };
 
@@ -118,7 +120,7 @@ public class BrowseStudents extends AppCompatActivity
                 String firstname = words[1];
 
                 Intent intent = new Intent(BrowseStudents.this, StudentView.class);
-                String Sendung = "stdView";
+                String Sendung2 = "stdView";
                 intent.putExtra("lastname", lastname);
                 intent.putExtra("firstname", firstname);
                 startActivity(intent);
@@ -131,7 +133,13 @@ public class BrowseStudents extends AppCompatActivity
     // will create an String Array with all Students in the DB
     private String[] readStudentsFromDatabase()
     {
-        ArrayList<Student> allStudents = helper.getStudentList();
+        ArrayList<Student> allStudents = new ArrayList<Student>();
+
+        // when putExtra is IDSearch call method findByFirstName
+        if (newString[0].equals("IDSearch")) {allStudents = helper.getSearchResultForFirstName(newString[1]);}
+        if (newString[0].equals("stdView")) {allStudents = helper.getStudentList();}
+        if (newString[0].equals("funkyView")) {allStudents = helper.getStudentList();}
+
         Iterator<Student> iter = allStudents.iterator();
 
         studentCount = allStudents.size();
