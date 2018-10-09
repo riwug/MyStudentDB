@@ -16,6 +16,7 @@ import java.util.Iterator;
 
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 /**
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
     Button btnBrowseStudents2;
     Button btnSearch;
     EditText mEdit;
+    TextView textFieldResult;
 
     private Helper helper;
 
@@ -78,6 +80,12 @@ public class MainActivity extends AppCompatActivity
         // Search Button
         // Button important: instantiate with new before creating Listener!!!
 
+
+        // init textFieldResult without content
+        textFieldResult   = (TextView)findViewById(R.id.textViewFieldResults);
+        // textFieldResult.setText("");
+
+
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener()
         {
@@ -85,10 +93,29 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
 
-                btnBrowseStudentsClickedSearchForID();
+                String searchedFirstname = (mEdit.getText().toString());
+                searchedFirstname = ("%" + searchedFirstname + "%");
+                btnBrowseStudentsClickedSearchForID((searchedFirstname));
+
+                // toDo
+                // habe jetzt hier 2 stunden verbraucht um unterschiedliche Messages an den User zu bringen
+                // abhängig was in den Feldern steht etc... AHHHHHHHHHH
+                // hat nicht geklappt
+                /*
+                ArrayList<Student> allStudents = new ArrayList<Student>();
+                allStudents = helper.getSearchResultForFirstName(searchedFirstname);
+
+                if (allStudents.size()==0){
+                    textFieldResult.setText("Fuck YOU");
+                } else {
+
+                    searchedFirstname = ("%" + searchedFirstname + "%");
+                    btnBrowseStudentsClickedSearchForID((searchedFirstname));
+                }*/
 
             }
         });
+
 
         // init text of editTextField
         mEdit   = (EditText)findViewById(R.id.fieldEditText);
@@ -104,6 +131,7 @@ public class MainActivity extends AppCompatActivity
                 //change the entered word
             }
         });
+
 
 
     }
@@ -130,19 +158,13 @@ public class MainActivity extends AppCompatActivity
 
     // putExtra will send additional data to the intent (view)
     // Search Button in Std View
-    public void btnBrowseStudentsClickedSearchForID()
+    public void btnBrowseStudentsClickedSearchForID(String searchedFirstname)
     {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String searchedFirstname = mEdit.getText().toString();
-        if (mEdit.getText().toString().matches("") | mEdit.getText().toString().matches("Enter text first")){
-            mEdit.setText("Enter text first");
-            System.out.println("nothing, add message to enter text");
-        } else {
-            searchedFirstname = ("%" + searchedFirstname + "%"); // need to add %xxx% to find similar firstnames that contain searchterm
-            String[] Sendung = {"IDSearch", searchedFirstname};
-            intent.putExtra("Sendung", Sendung);
-            startActivity(intent);
-        }
+        String[] Sendung = {"IDSearch", searchedFirstname};
+        intent.putExtra("Sendung", Sendung);
+        startActivity(intent);
+
     }
 
 

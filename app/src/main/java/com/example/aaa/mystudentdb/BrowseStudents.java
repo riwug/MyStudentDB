@@ -131,12 +131,16 @@ public class BrowseStudents extends AppCompatActivity
     }
 
     // will create an String Array with all Students in the DB
-    private String[] readStudentsFromDatabase()
+    public String[] readStudentsFromDatabase()
     {
         ArrayList<Student> allStudents = new ArrayList<Student>();
 
         // when putExtra is IDSearch call method findByFirstName
         if (newString[0].equals("IDSearch")) {allStudents = helper.getSearchResultForFirstName(newString[1]);}
+        if (allStudents.size()>0) {
+
+        } else {
+        }
         if (newString[0].equals("stdView")) {allStudents = helper.getStudentList();}
         if (newString[0].equals("funkyView")) {allStudents = helper.getStudentList();}
 

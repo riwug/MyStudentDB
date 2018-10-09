@@ -57,9 +57,13 @@ public class Helper
     }
 
     private void writeSampleStudentsToDatabase(){
-        Student exampleStudent = generateSampleStudent("Armin");
+        Student exampleStudent = generateSampleStudent("Erster");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Zweiter");
         studentDatabase.studentDao().insertAll(exampleStudent);
         exampleStudent = generateSampleStudent("Riwu");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Armin");
         studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
