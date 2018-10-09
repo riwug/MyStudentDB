@@ -83,8 +83,7 @@ public class MainActivity extends AppCompatActivity
 
         // init textFieldResult without content
         textFieldResult   = (TextView)findViewById(R.id.textViewFieldResults);
-        // textFieldResult.setText("");
-
+        textFieldResult.setText("");
 
         btnSearch = (Button) findViewById(R.id.btnSearch);
         btnSearch.setOnClickListener(new View.OnClickListener()
@@ -92,20 +91,25 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                // for checking in search returned students
+                // ArrayList<Student> allStudents = new ArrayList<Student>();
+                //allStudents = helper.getSearchResultForFirstName(searchedFirstname);
 
                 String searchedFirstname = (mEdit.getText().toString());
                 searchedFirstname = ("%" + searchedFirstname + "%");
-                btnBrowseStudentsClickedSearchForID((searchedFirstname));
 
                 // toDo
                 // habe jetzt hier 2 stunden verbraucht um unterschiedliche Messages an den User zu bringen
                 // abhängig was in den Feldern steht etc... AHHHHHHHHHH
                 // hat nicht geklappt
-                /*
-                ArrayList<Student> allStudents = new ArrayList<Student>();
-                allStudents = helper.getSearchResultForFirstName(searchedFirstname);
 
-                if (allStudents.size()==0){
+                if (mEdit.getText().toString().equals("")){
+                    mEdit.setText("Enter Firstname:");
+                } else {
+                    btnBrowseStudentsClickedSearchForID((searchedFirstname));
+                }
+
+                /*if (allStudents.size()==0){
                     textFieldResult.setText("Fuck YOU");
                 } else {
 
@@ -124,6 +128,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                // just to get rid of the text when clicked on
                 mEdit.setText("");
                 // toDO
                 //EditText Field will "always" delete content on click.
