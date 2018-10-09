@@ -98,6 +98,10 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 mEdit.setText("");
+                // toDO
+                //EditText Field will "always" delete content on click.
+                //When text already added, edit function should start to
+                //change the entered word
             }
         });
 
