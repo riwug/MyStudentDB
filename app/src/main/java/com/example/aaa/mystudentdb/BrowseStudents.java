@@ -142,7 +142,7 @@ public class BrowseStudents extends AppCompatActivity
         ArrayList<Student> allStudents = new ArrayList<Student>();
 
         // when putExtra is IDSearch call method findByFirstName
-        if (newString[0].equals("IDSearch")) {allStudents = helper.getSearchResultForFirstName(newString[1]);}
+        if (newString[0].equals("nameSearch")) {allStudents = helper.getSearchResultForFirstOrLastName(newString[1]);}
         if (allStudents.size()>0) {
 
         } else {

@@ -84,7 +84,7 @@ public class Helper
         return (ArrayList) studentDatabase.studentDao().getAll();
     }
 
-    // will get "student" with ID
+    // will get "student" with firstname
     public ArrayList<Student> getSearchResultForFirstName(String first)
         {
         if (((ArrayList) studentDatabase.studentDao().findByFirstName(first)).size() == 0) {
@@ -93,6 +93,16 @@ public class Helper
             return (ArrayList) studentDatabase.studentDao().findByFirstName(first);
         }
         }
+
+    // will get "student" with first or lastname
+    public ArrayList<Student> getSearchResultForFirstOrLastName(String name)
+    {
+        if (((ArrayList) studentDatabase.studentDao().findByFirstOrLastName(name)).size() == 0) {
+            return null;
+        } else {
+            return (ArrayList) studentDatabase.studentDao().findByFirstOrLastName(name);
+        }
+    }
 
     public String timestampOnCreate()
     {

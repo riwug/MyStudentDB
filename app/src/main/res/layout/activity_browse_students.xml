@@ -6,56 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".BrowseStudents">
 
-    <ListView
-        android:id="@+id/studentListView"
+    <EditText
+        android:id="@+id/fieldEditTextBSView"
         android:layout_width="368dp"
-        android:layout_height="441dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Search for Studentname"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <Button
+        android:id="@+id/btnSearchBSView"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_type1"
+        android:text="Search"
+        android:textColor="@color/buttonTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fieldEditTextBSView" />
+
+    <ListView
+        android:id="@+id/studentListView"
+        android:layout_width="367dp"
+        android:layout_height="350dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="152dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnClose"
-        android:layout_width="117dp"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="close"
-        app:layout_constraintBottom_toTopOf="@+id/studentListView"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/button_type1"
-        android:textColor="@color/buttonTextColor"/>
+        android:text="close"
+        android:textColor="@color/buttonTextColor"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnNew"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="99dp"
-        android:layout_height="37dp"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="18dp" />
 
     <Button
         android:id="@+id/btnNew"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="100dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button_type1"
         android:text="new..."
-        app:layout_constraintBottom_toTopOf="@+id/studentListView"
+        android:textColor="@color/buttonTextColor"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/btnClose"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/button_type1"
-        android:textColor="@color/buttonTextColor"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="51dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="151dp" />
 
 </android.support.constraint.ConstraintLayout>

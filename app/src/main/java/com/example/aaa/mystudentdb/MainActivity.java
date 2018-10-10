@@ -91,20 +91,20 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String searchedFirstname = (mEdit.getText().toString());
-                searchedFirstname = ("%" + searchedFirstname + "%");
+                String searchedName = (mEdit.getText().toString());
+                searchedName = ("%" + searchedName + "%");
 
                 if (mEdit.getText().toString().length() > 0){
                 // for checking in search returned students
                     ArrayList<Student> allStudents = new ArrayList<Student>();
-                    allStudents = helper.getSearchResultForFirstName(searchedFirstname);
+                    allStudents = helper.getSearchResultForFirstOrLastName(searchedName);
 
                     if (allStudents == null){
                         textFieldResult.setText("no result:");
                     }
 
                     else {
-                        btnBrowseStudentsClickedSearchForID((searchedFirstname));
+                        btnBrowseStudentsClickedSearchForName((searchedName));
                         textFieldResult.setText("");
                         mEdit.setText("");
                     }
@@ -159,10 +159,10 @@ public class MainActivity extends AppCompatActivity
 
     // putExtra will send additional data to the intent (view)
     // Search Button in Std View
-    public void btnBrowseStudentsClickedSearchForID(String searchedFirstname)
+    public void btnBrowseStudentsClickedSearchForName(String searchedName)
     {
         Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String[] Sendung = {"IDSearch", searchedFirstname};
+        String[] Sendung = {"nameSearch", searchedName};
         intent.putExtra("Sendung", Sendung);
         startActivity(intent);
 
