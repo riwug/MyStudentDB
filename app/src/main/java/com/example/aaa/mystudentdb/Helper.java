@@ -72,6 +72,10 @@ public class Helper
         studentDatabase.studentDao().insertAll(exampleStudent);
         exampleStudent = generateSampleStudent("Yuli", "Geller", "Multi");
         studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Armin", "Rabi", "Gitarre");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Richard", "Tuch", "Klavier");
+        studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
     // will get "all students"

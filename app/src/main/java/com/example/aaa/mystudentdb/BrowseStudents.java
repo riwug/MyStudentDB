@@ -74,7 +74,6 @@ public class BrowseStudents extends AppCompatActivity
         setContentView(R.layout.activity_browse_students);
         this.setTitle("Students");
 
-
         Button closeButton = (Button) findViewById(R.id.btnClose);
         Button newButton = (Button) findViewById(R.id.btnNew);
         closeButton.setOnClickListener(new View.OnClickListener() {
