@@ -28,9 +28,11 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.browsestudent_listview_row_layout, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
+        TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
+        TextView textView2 = (TextView) rowView.findViewById(R.id.secondLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         textView.setText(values[position]);
+        textView2.setText("Second Line");
         // change the icon for Windows and iPhone
         String s = values[position];
 
