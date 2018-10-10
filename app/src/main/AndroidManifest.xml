@@ -18,8 +18,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".BrowseStudents"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".Main2Activity" />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
         <activity android:name=".StudentView"></activity>
     </application>
 

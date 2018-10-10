@@ -16,6 +16,7 @@
         android:ems="10"
         android:hint="Search for Studentname"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -40,12 +41,16 @@
     <ListView
         android:id="@+id/studentListView"
         android:layout_width="367dp"
-        android:layout_height="350dp"
+        android:layout_height="354dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline6"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSearchBSView" />
 
     <Button
         android:id="@+id/btnClose"
@@ -100,5 +105,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="151dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="565dp" />
 
 </android.support.constraint.ConstraintLayout>

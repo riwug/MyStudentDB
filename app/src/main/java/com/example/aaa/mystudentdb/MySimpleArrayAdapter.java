@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
@@ -32,30 +34,15 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         // change the icon for Windows and iPhone
         String s = values[position];
 
-        System.out.println("values");
-        System.out.println("values");
-        System.out.println("values");
-        System.out.println("values");
-        System.out.println("values");
-        System.out.println(values);
+        System.out.print("var of values:");
+        System.out.println(Arrays.toString(values));
 
-        System.out.println("textView.setText(values[position]);");
-        System.out.println("textView.setText(values[position]);");
-        System.out.println("textView.setText(values[position]);");
-        System.out.println("textView.setText(values[position]);");
-        System.out.println("textView.setText(values[position]);");
-        System.out.println(values[position]);
-        System.out.println("String s = values[position]");
-        System.out.println("String s = values[position]");
-        System.out.println("String s = values[position]");
-        System.out.println("String s = values[position]");
-        System.out.println("String s = values[position]");
-        System.out.println(s);
-
-
+        // toDO
+        // get him to choose the picture according to field "instrument" (need to be send with)
+        //
         // position is Students Lastname. Dont know why it is called position
         // or if we can call any field?
-        if (s.startsWith("Dach") || s.startsWith("Ne1") || s.startsWith("Geller")){
+        if (s.startsWith("May") || s.startsWith("Nagel") || s.endsWith("Armin")){
             imageView.setImageResource(R.mipmap.guitar_mipmap_mdpi);
         } else {
             imageView.setImageResource(R.mipmap.piano_mipmap_mdpi);

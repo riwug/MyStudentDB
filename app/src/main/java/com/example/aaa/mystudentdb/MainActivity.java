@@ -1,20 +1,14 @@
 package com.example.aaa.mystudentdb;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.view.KeyEvent;
-import android.util.Log;
 
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -36,7 +30,7 @@ public class MainActivity extends AppCompatActivity
     Button btnBrowseStudents;
     Button btnBrowseStudents2;
     Button btnSearch;
-    EditText mEdit;
+    EditText mEditTextFieldUsedAsSearchfieldMainView;
     TextView textFieldResult;
 
     private Helper helper;
@@ -91,10 +85,10 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                String searchedName = (mEdit.getText().toString());
+                String searchedName = (mEditTextFieldUsedAsSearchfieldMainView.getText().toString());
                 searchedName = ("%" + searchedName + "%");
 
-                if (mEdit.getText().toString().length() > 0){
+                if (mEditTextFieldUsedAsSearchfieldMainView.getText().toString().length() > 0){
                 // for checking in search returned students
                     ArrayList<Student> allStudents = new ArrayList<Student>();
                     allStudents = helper.getSearchResultForFirstOrLastName(searchedName);
@@ -106,7 +100,7 @@ public class MainActivity extends AppCompatActivity
                     else {
                         btnBrowseStudentsClickedSearchForName((searchedName));
                         textFieldResult.setText("");
-                        mEdit.setText("");
+                        mEditTextFieldUsedAsSearchfieldMainView.setText("");
                     }
 
                 } else {
@@ -118,14 +112,14 @@ public class MainActivity extends AppCompatActivity
 
 
         // init text of editTextField
-        mEdit   = (EditText)findViewById(R.id.fieldEditText);
-        mEdit.setOnClickListener(new View.OnClickListener()
+        mEditTextFieldUsedAsSearchfieldMainView = (EditText)findViewById(R.id.fieldEditText);
+        mEditTextFieldUsedAsSearchfieldMainView.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 // just to get rid of the text when clicked on
-                mEdit.setText("");
+                mEditTextFieldUsedAsSearchfieldMainView.setText("");
                 // toDO
                 //EditText Field will "always" delete content on click.
                 //When text already added, edit function should start to

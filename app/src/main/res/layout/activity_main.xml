@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/btnBrowseStudents"
-        android:layout_width="161dp"
-        android:layout_height="61dp"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="264dp"
@@ -28,8 +28,8 @@
 
     <Button
         android:id="@+id/btnBrowseStudents2"
-        android:layout_width="161dp"
-        android:layout_height="61dp"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="268dp"
@@ -168,6 +168,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="441dp" />
+        app:layout_constraintGuide_begin="507dp" />
 
 </android.support.constraint.ConstraintLayout>

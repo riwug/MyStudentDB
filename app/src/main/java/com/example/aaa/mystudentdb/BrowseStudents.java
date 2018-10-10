@@ -10,11 +10,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -43,6 +45,9 @@ public class BrowseStudents extends AppCompatActivity
     String [] newString; // wanted to use this string in an cause for search view
     private Helper helper;
     private ListView studentListView;
+    EditText mEditTextFieldUsedAsSearchfieldBSView;
+    Button btnSearchBSView;
+
     // map to store firstname,lastname. Enables us to make a unique query if a student is selected from list
     private HashMap<String, String> studentMap = new HashMap<>();
 
@@ -66,7 +71,8 @@ public class BrowseStudents extends AppCompatActivity
 
         // total crazy, es ist super wichtig bei if else, dass man die Klammern an die richtigen Stellen macht!
         if (newString[0].equals("stdView") ) {
-            BGColor = -1; // -1
+            // I want to have the nice std color
+            // BGColor = -1; // -1
         } else if (newString[0].equals("funkyView")) {
             BGColor = -256; // -256
         };
@@ -98,9 +104,12 @@ public class BrowseStudents extends AppCompatActivity
             }
         });
 
+
+
+
+
         studentListView = findViewById(R.id.studentListView);
         String[] studArr = readStudentsFromDatabase();
-
         // make adapter for view
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
         //        android.R.layout.simple_list_item_1, studArr);
@@ -112,10 +121,12 @@ public class BrowseStudents extends AppCompatActivity
         // textfield to display counts list items
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setTextSize(20);
-        textView.setText(studArr.length + " entries");
+        textView.setText(studArr.length + " Students");
 
         // toDO...
         // now only item ( name ) is clickable. I want the whole cell / row to be clickable
+
+
 
         OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -126,7 +137,7 @@ public class BrowseStudents extends AppCompatActivity
                 String firstname = words[1];
 
                 Intent intent = new Intent(BrowseStudents.this, StudentView.class);
-                String Sendung2 = "stdView";
+                String Sendung = "stdView";
                 intent.putExtra("lastname", lastname);
                 intent.putExtra("firstname", firstname);
                 startActivity(intent);
@@ -134,38 +145,76 @@ public class BrowseStudents extends AppCompatActivity
         };
         studentListView.setOnItemClickListener(mMessageClickedHandler);
 
+
+
+
+        // init text of editTextField
+        mEditTextFieldUsedAsSearchfieldBSView   = (EditText)findViewById(R.id.fieldEditTextBSView);
+        mEditTextFieldUsedAsSearchfieldBSView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // just to get rid of the text when clicked on
+                mEditTextFieldUsedAsSearchfieldBSView.setText("");
+                // toDO
+                //EditText Field will "always" delete content on click.
+                //When text already added, edit function should start to
+                //change the entered word
+            }
+        });
+
+
+
+
+        Button btnSearchBSView = (Button) findViewById(R.id.btnSearchBSView);
+        btnSearchBSView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                mEditTextFieldUsedAsSearchfieldBSView.setText("do it!");
+
+            }
+        });
+
+
     }
 
     // will create an String Array with all Students in the DB
     public String[] readStudentsFromDatabase()
     {
-        ArrayList<Student> allStudents = new ArrayList<Student>();
+        ArrayList<Student> studentsList = new ArrayList<Student>();
 
-        // when putExtra is IDSearch call method findByFirstName
-        if (newString[0].equals("nameSearch")) {allStudents = helper.getSearchResultForFirstOrLastName(newString[1]);}
-        if (allStudents.size()>0) {
+        // when putExtra is nameSearch call method findByFirstName
+        if (newString[0].equals("nameSearch")) {studentsList = helper.getSearchResultForFirstOrLastName(newString[1]);}
+        if (studentsList.size()>0) {
 
         } else {
         }
-        if (newString[0].equals("stdView")) {allStudents = helper.getStudentList();}
-        if (newString[0].equals("funkyView")) {allStudents = helper.getStudentList();}
+        if (newString[0].equals("stdView")) {studentsList = helper.getStudentList();}
+        if (newString[0].equals("funkyView")) {studentsList = helper.getStudentList();}
 
-        Iterator<Student> iter = allStudents.iterator();
+        Iterator<Student> iter = studentsList.iterator();
 
-        studentCount = allStudents.size();
+        studentCount = studentsList.size();
 
         // for displaying the list, we need a String for every row (ArrayAdapter needs a String
         // array)
-        String [] studentNamesArray = new String[allStudents.size()];   // important: initialize String array
+        String [] studentNamesArray = new String[studentsList.size()];   // important: initialize String array
         int count = 0;
         while (iter.hasNext()) {
             System.out.println("element added");
             Student stud = iter.next();
             studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name());
-            studentMap.put(stud.getInstrument(), stud.getFirst_name());
-            //studentMap.put(stud.getLast_name(), stud.getFirst_name());
+            studentMap.put(stud.getLast_name(), stud.getFirst_name());
             count++;
         }
+        System.out.print("var of studentNamesArray:");
+        System.out.println(Arrays.toString(studentNamesArray));
+
         return studentNamesArray;
+
     }
+
 }
