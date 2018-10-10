@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -65,13 +66,13 @@ public class BrowseStudents extends AppCompatActivity
 
         // total crazy, es ist super wichtig bei if else, dass man die Klammern an die richtigen Stellen macht!
         if (newString[0].equals("stdView") ) {
-            BGColor = -1;
+            BGColor = -1; // -1
         } else if (newString[0].equals("funkyView")) {
-            BGColor = -256;
+            BGColor = -256; // -256
         };
 
         setContentView(R.layout.activity_browse_students);
-        this.setTitle("Browse students");
+        this.setTitle("Students");
 
 
         Button closeButton = (Button) findViewById(R.id.btnClose);
@@ -100,17 +101,23 @@ public class BrowseStudents extends AppCompatActivity
 
         studentListView = findViewById(R.id.studentListView);
         String[] studArr = readStudentsFromDatabase();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, studArr);
-        studentListView.setAdapter(adapter);
 
+        // make adapter for view
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        //        android.R.layout.simple_list_item_1, studArr);
+
+        MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, studArr);
+        studentListView.setAdapter(adapter);
         studentListView.setBackgroundColor(BGColor);
 
+        // textfield to display counts list items
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setTextSize(20);
         textView.setText(studArr.length + " entries");
 
-        // Listener for clicks on List-Items. Create a message handling object as an anonymous class.
+        // toDO...
+        // now only item ( name ) is clickable. I want the whole cell / row to be clickable
+
         OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 String str = studentListView.getItemAtPosition(position).toString();
@@ -155,8 +162,9 @@ public class BrowseStudents extends AppCompatActivity
         while (iter.hasNext()) {
             System.out.println("element added");
             Student stud = iter.next();
-            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name() + " " + stud.getTimestampOnCreate());
-            studentMap.put(stud.getLast_name(), stud.getFirst_name());
+            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name());
+            studentMap.put(stud.getInstrument(), stud.getFirst_name());
+            //studentMap.put(stud.getLast_name(), stud.getFirst_name());
             count++;
         }
         return studentNamesArray;

@@ -39,4 +39,5 @@ dependencies {
     implementation "android.arch.persistence.room:common:$arch_version"
     implementation "android.arch.lifecycle:livedata:$arch_version"
     implementation "android.arch.lifecycle:extensions:$arch_version"
+    implementation 'com.android.support:design:27.1.1'
 }

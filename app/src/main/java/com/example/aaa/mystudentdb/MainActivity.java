@@ -105,27 +105,13 @@ public class MainActivity extends AppCompatActivity
 
                     else {
                         btnBrowseStudentsClickedSearchForID((searchedFirstname));
+                        textFieldResult.setText("");
+                        mEdit.setText("");
                     }
 
                 } else {
                     textFieldResult.setText("please enter search term:");
                 }
-
-
-                // toDo
-                // habe jetzt hier 2 stunden verbraucht um unterschiedliche Messages an den User zu bringen
-                // abhängig was in den Feldern steht etc... AHHHHHHHHHH
-                // hat nicht geklappt
-
-
-
-                /*if (allStudents.size()==0){
-                    textFieldResult.setText("Fuck YOU");
-                } else {
-
-                    searchedFirstname = ("%" + searchedFirstname + "%");
-                    btnBrowseStudentsClickedSearchForID((searchedFirstname));
-                }*/
 
             }
         });

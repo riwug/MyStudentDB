@@ -58,15 +58,19 @@ public class Helper
 
     private void writeSampleStudentsToDatabase()
     {
-        Student exampleStudent = generateSampleStudent("Erster");
+        Student exampleStudent = generateSampleStudent("Harald", "May", "Gitarre");
         studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Zweiter");
+        exampleStudent = generateSampleStudent("Warin", "Nagel", "Klavier");
         studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Riwu");
+        exampleStudent = generateSampleStudent("Armin", "Dach", "Gitarre");
         studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Armin");
+        exampleStudent = generateSampleStudent("Brau", "Bierer", "Klavier");
         studentDatabase.studentDao().insertAll(exampleStudent);
-        exampleStudent = generateSampleStudent("Minion");
+        exampleStudent = generateSampleStudent("Mina", "Geller", "Gitarre");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Ach", "Ne", "Multi");
+        studentDatabase.studentDao().insertAll(exampleStudent);
+        exampleStudent = generateSampleStudent("Yuli", "Geller", "Multi");
         studentDatabase.studentDao().insertAll(exampleStudent);
     }
 
@@ -97,15 +101,18 @@ public class Helper
      * @param firstname First name of the new Student instance
      * @return returns a new Student object
      */
-    protected Student generateSampleStudent(String firstname)
+    protected Student generateSampleStudent(String firstname, String lastname, String instrument)
     {
         Student student1 = new Student();
         student1.setFirst_name(firstname);
-        student1.setLast_name("Wild");
+        student1.setLast_name(lastname);
+        student1.setInstrument(instrument);
         student1.setContact(firstname + "@site.com");
         student1.setTimestampOnCreate(timestampOnCreate());
         return student1;
     }
+
+
 
 /*
         for(int l=0; l<=500; l++) {

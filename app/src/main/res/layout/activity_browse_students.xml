@@ -25,7 +25,9 @@
         android:layout_marginBottom="8dp"
         android:text="close"
         app:layout_constraintBottom_toTopOf="@+id/studentListView"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/button_type1"
+        android:textColor="@color/buttonTextColor"/>
 
     <TextView
         android:id="@+id/textView"
@@ -52,6 +54,8 @@
         app:layout_constraintBottom_toTopOf="@+id/studentListView"
         app:layout_constraintEnd_toStartOf="@+id/btnClose"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_type1"
+        android:textColor="@color/buttonTextColor"/>
 
 </android.support.constraint.ConstraintLayout>

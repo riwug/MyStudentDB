@@ -26,7 +26,9 @@
         android:layout_marginRight="8dp"
         android:text="close"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_type1"
+        android:textColor="@color/buttonTextColor"/>
 
     <Button
         android:id="@+id/btnSave"
@@ -37,7 +39,9 @@
         android:layout_marginRight="8dp"
         android:text="Save"
         app:layout_constraintEnd_toStartOf="@+id/btnClose"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/button_type1"
+        android:textColor="@color/buttonTextColor"/>
 
     <TextView
         android:id="@+id/textViewFirstname"

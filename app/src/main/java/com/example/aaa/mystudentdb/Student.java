@@ -8,6 +8,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class Student
 {
 
+    // all columns
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -17,6 +18,9 @@ public class Student
     @ColumnInfo(name = "last_name")
     private String last_name;
 
+    @ColumnInfo(name = "instrument")
+    private String instrument;
+
     @ColumnInfo(name = "contact")
     private String contact;
 
@@ -24,19 +28,6 @@ public class Student
     private String timestampOnCreate;
 
 
-    /* add these later
-    @ColumnInfo(name = "personalinfo")
-    private String personalinfo;
-
-    @ColumnInfo(name = "targets")
-    private String targets;
-
-    @ColumnInfo(name = "abilities")
-    private String abilities;
-
-    @ColumnInfo(name = "repertoire")
-    private String repertoire;
-    */
 
     // all getters and setters
 
@@ -64,65 +55,23 @@ public class Student
         this.last_name = last_name;
     }
 
-    public String getContact() {
-        return contact;
-    }
+    public String getContact() { return contact; }
 
     public void setContact(String contact) {
         this.contact = contact;
     }
 
-    public String getTimestampOnCreate() {
-        return timestampOnCreate;
+    public String getInstrument() { return instrument; }
+
+    public void setInstrument(String instrument) {
+        this.instrument = instrument;
     }
+
+    public String getTimestampOnCreate() {return timestampOnCreate;}
 
     public void setTimestampOnCreate(String timestampOnCreate) {
         this.timestampOnCreate = timestampOnCreate;
     }
 
-    /*
-    public String getTimestampOnCreate() {
-        return timestampOnCreate;
-    }
 
-    // Create a timestamp to write into to db that is more conceivable that all entries
-    // are different whereas they all look the same
-    public void setTimestampOnCreate(String timestampOnCreate) {
-        this.timestampOnCreate = timestampOnCreate;
-        }
-*/
-
-    /* add these later
-    public String getPersonalinfo() {
-        return personalinfo;
-    }
-
-    public void setPersonalinfo(String personalinfo) {
-        this.personalinfo = personalinfo;
-    }
-
-    public String getTargets() {
-        return targets;
-    }
-
-    public void setTargets(String targets) {
-        this.targets = targets;
-    }
-
-    public String getAbilities() {
-        return abilities;
-    }
-
-    public void setAbilities(String abilities) {
-        this.abilities = abilities;
-    }
-
-    public String getRepertoire() {
-        return repertoire;
-    }
-
-    public void setRepertoire(String repertoire) {
-        this.repertoire = repertoire;
-    }
-    */
 }
