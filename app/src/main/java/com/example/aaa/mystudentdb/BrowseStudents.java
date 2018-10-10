@@ -1,20 +1,16 @@
 package com.example.aaa.mystudentdb;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -104,37 +100,30 @@ public class BrowseStudents extends AppCompatActivity
             }
         });
 
-
-
-
-
         studentListView = findViewById(R.id.studentListView);
-        String[] studArr = readStudentsFromDatabase();
+        //String[] studArr = readStudentsFromDatabase();
         // make adapter for view
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
         //        android.R.layout.simple_list_item_1, studArr);
 
-        MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, studArr);
+        ArrayListAdapter adapter = new ArrayListAdapter(this, readStudentsFromDatabase2());
         studentListView.setAdapter(adapter);
         studentListView.setBackgroundColor(BGColor);
 
         // textfield to display counts list items
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setTextSize(20);
-        textView.setText(studArr.length + " Students");
+        textView.setText(readStudentsFromDatabase2().size() + " Students");
 
         // toDO...
         // now only item ( name ) is clickable. I want the whole cell / row to be clickable
 
-
-
         OnItemClickListener mMessageClickedHandler = new OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                String str = studentListView.getItemAtPosition(position).toString();
+                Student student = (Student) studentListView.getItemAtPosition(position);
 
-                String[] words = str.split(" ");
-                String lastname = words[0];
-                String firstname = words[1];
+                String lastname = student.getLast_name();
+                String firstname = student.getFirst_name();
 
                 Intent intent = new Intent(BrowseStudents.this, StudentView.class);
                 String Sendung = "stdView";
@@ -144,9 +133,6 @@ public class BrowseStudents extends AppCompatActivity
             }
         };
         studentListView.setOnItemClickListener(mMessageClickedHandler);
-
-
-
 
         // init text of editTextField
         mEditTextFieldUsedAsSearchfieldBSView   = (EditText)findViewById(R.id.fieldEditTextBSView);
@@ -163,8 +149,6 @@ public class BrowseStudents extends AppCompatActivity
                 //change the entered word
             }
         });
-
-
 
 
         Button btnSearchBSView = (Button) findViewById(R.id.btnSearchBSView);
@@ -184,29 +168,30 @@ public class BrowseStudents extends AppCompatActivity
     // will create an String Array with all Students in the DB
     public String[] readStudentsFromDatabase()
     {
-        ArrayList<Student> studentsList = new ArrayList<Student>();
+        ArrayList<Student> studentsArrayList = new ArrayList<Student>();
 
         // when putExtra is nameSearch call method findByFirstName
-        if (newString[0].equals("nameSearch")) {studentsList = helper.getSearchResultForFirstOrLastName(newString[1]);}
-        if (studentsList.size()>0) {
+        if (newString[0].equals("nameSearch")) {studentsArrayList = helper.getSearchResultForFirstOrLastName(newString[1]);}
+        if (studentsArrayList.size()>0) {
 
         } else {
         }
-        if (newString[0].equals("stdView")) {studentsList = helper.getStudentList();}
-        if (newString[0].equals("funkyView")) {studentsList = helper.getStudentList();}
+        if (newString[0].equals("stdView")) {studentsArrayList = helper.getStudentList();}
+        if (newString[0].equals("funkyView")) {studentsArrayList = helper.getStudentList();}
 
-        Iterator<Student> iter = studentsList.iterator();
+        Iterator<Student> iter = studentsArrayList.iterator();
 
-        studentCount = studentsList.size();
+        studentCount = studentsArrayList.size();
 
         // for displaying the list, we need a String for every row (ArrayAdapter needs a String
         // array)
-        String [] studentNamesArray = new String[studentsList.size()];   // important: initialize String array
+        
+        String [] studentNamesArray = new String[studentsArrayList.size()];   // important: initialize String array
         int count = 0;
         while (iter.hasNext()) {
             System.out.println("element added");
             Student stud = iter.next();
-            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name());
+            studentNamesArray[count] = (stud.getLast_name() + " " + stud.getFirst_name() + " " + stud.getInstrument());
             studentMap.put(stud.getLast_name(), stud.getFirst_name());
             count++;
         }
@@ -216,5 +201,24 @@ public class BrowseStudents extends AppCompatActivity
         return studentNamesArray;
 
     }
+
+
+
+    public ArrayList<Student> readStudentsFromDatabase2()
+    {
+        ArrayList<Student> studentsArrayList = new ArrayList<Student>();
+
+        // when putExtra is nameSearch call method findByFirstName
+        if (newString[0].equals("nameSearch")) {studentsArrayList = helper.getSearchResultForFirstOrLastName(newString[1]);}
+        if (studentsArrayList.size()>0) {
+
+        } else {
+        }
+        if (newString[0].equals("stdView")) {studentsArrayList = helper.getStudentList();}
+        if (newString[0].equals("funkyView")) {studentsArrayList = helper.getStudentList();}
+
+        return studentsArrayList;
+    }
+
 
 }

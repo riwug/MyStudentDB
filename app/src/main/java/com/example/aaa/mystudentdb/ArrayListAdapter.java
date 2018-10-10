@@ -11,13 +11,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MySimpleArrayAdapter extends ArrayAdapter<String> {
+public class ArrayListAdapter extends ArrayAdapter<String> {
     private final Context context;
-    private final String[] values;
+    //private final String[] values;
+    private ArrayList<Student> values;
 
-    public MySimpleArrayAdapter(Context context, String[] values) {
+    public ArrayListAdapter(Context context, ArrayList values) {
         super(context, -1, values);
         this.context = context;
         this.values = values;
@@ -31,20 +33,12 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
         TextView textView2 = (TextView) rowView.findViewById(R.id.secondLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        textView.setText(values[position]);
-        textView2.setText("Second Line");
+        textView.setText(values.get(position).getFirst_name()+" "+values.get(position).getLast_name());
+        textView2.setText(values.get(position).getInstrument());
         // change the icon for Windows and iPhone
-        String s = values[position];
+        String s = values.get(position).getInstrument();
 
-        System.out.print("var of values:");
-        System.out.println(Arrays.toString(values));
-
-        // toDO
-        // get him to choose the picture according to field "instrument" (need to be send with)
-        //
-        // position is Students Lastname. Dont know why it is called position
-        // or if we can call any field?
-        if (s.startsWith("May") || s.startsWith("Nagel") || s.endsWith("Armin")){
+        if (s.startsWith("Gitarre")){
             imageView.setImageResource(R.mipmap.guitar_mipmap_mdpi);
         } else {
             imageView.setImageResource(R.mipmap.piano_mipmap_mdpi);

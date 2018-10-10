@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class StudentView extends AppCompatActivity {
 
     Helper helper;
@@ -46,10 +48,12 @@ public class StudentView extends AppCompatActivity {
 
         textViewData = (TextView) findViewById(R.id.textViewData);
 
-        Student actualStudent = helper.getStudentDAO().findByName(strFirstname, strLastname);
-        
-        textViewData.setText("contact: " + actualStudent.getContact() + "\n" + "id: " +
-                actualStudent.getId() + "\n" + "timestamp: " + actualStudent.getTimestampOnCreate());
+        ArrayList<Student> studentListArray = (ArrayList) helper.getStudentDAO().findByFirstOrLastName(strLastname);
+
+        Student student = studentListArray.get(0);
+
+        textViewData.setText("contact: " + student.getContact() + "\n" + "id: " +
+                student.getId() + "\n" + "timestamp: " + student.getTimestampOnCreate());
 
         Button closeButton = (Button) findViewById(R.id.btnClose);
         Button saveButton = (Button) findViewById(R.id.btnSave);

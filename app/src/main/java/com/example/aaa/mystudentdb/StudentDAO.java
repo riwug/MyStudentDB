@@ -22,7 +22,7 @@ public interface StudentDAO
     @Query("SELECT * FROM Student WHERE first_name LIKE :name OR last_name LIKE :name")
     List<Student> findByFirstOrLastName(String name);
 
-    @Query("SELECT * FROM Student WHERE first_name LIKE :first AND "+ "last_name LIKE :last LIMIT 1")
+    @Query("SELECT * FROM Student WHERE first_name LIKE :first AND last_name LIKE :last LIMIT 1")
     Student findByName(String first, String last);
 
     @Insert
