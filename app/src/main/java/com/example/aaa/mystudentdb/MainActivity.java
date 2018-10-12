@@ -38,6 +38,14 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        // testing the weird thing called "enum"
+        Instrument instr = Instrument.Piano;
+        System.out.println("++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++");
+        System.out.println("Instrument has value " + instr);
+        System.out.println("++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++");
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
