@@ -1,16 +1,21 @@
 package com.example.aaa.mystudentdb;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -27,25 +32,18 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity
 {
-    Button btnBrowseStudents;
-    Button btnBrowseStudents2;
     Button btnSearch;
     EditText mEditTextFieldUsedAsSearchfieldMainView;
-    TextView textFieldResult;
-
     private Helper helper;
+    private ListView studentListView;
+    Button btnSearchBSView;
+
+    // map to store firstname,lastname. Enables us to make a unique query if a student is selected from list
+    private HashMap<String, String> studentMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        // testing the weird thing called "enum"
-        Instrument instr = Instrument.Piano;
-        System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("Instrument has value " + instr);
-        System.out.println("++++++++++++++++++++++++++++");
-        System.out.println("++++++++++++++++++++++++++++");
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -55,72 +53,38 @@ public class MainActivity extends AppCompatActivity
         // init helper-Class
         helper = helper.getInstance(this.getApplicationContext());
 
-        // Button1 Standard
-        // Button important: instantiate with new before creating Listener!!!
-        btnBrowseStudents = (Button) findViewById(R.id.btnBrowseStudents);
-        btnBrowseStudents.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                btnBrowseStudentsClicked();
-            }
-        });
-
-        // Button2 Funky
-        // Button important: instantiate with new before creating Listener!!!
-        btnBrowseStudents2 = (Button) findViewById(R.id.btnBrowseStudents2);
-        btnBrowseStudents2.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                btnBrowseStudentsClickedFunky();
-            }
-        });
-
         // Search Button
         // Button important: instantiate with new before creating Listener!!!
 
+        studentListView = findViewById(R.id.studentListView);
+        //String[] studArr = readStudentsFromDatabase();
+        // make adapter for view
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        //        android.R.layout.simple_list_item_1, studArr);
 
-        // init textFieldResult without content
-        textFieldResult   = (TextView)findViewById(R.id.textViewFieldResults);
-        textFieldResult.setText("");
+        ArrayListAdapter adapter = new ArrayListAdapter(this, readStudentsAllFromDatabase());
+        studentListView.setAdapter(adapter);
+        //studentListView.setBackgroundColor(BGColor);
 
-        btnSearch = (Button) findViewById(R.id.btnSearch);
-        btnSearch.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String searchedName = (mEditTextFieldUsedAsSearchfieldMainView.getText().toString());
-                searchedName = ("%" + searchedName + "%");
 
-                if (mEditTextFieldUsedAsSearchfieldMainView.getText().toString().length() > 0){
-                // for checking in search returned students
-                    ArrayList<Student> allStudents = new ArrayList<Student>();
-                    allStudents = helper.getSearchResultForFirstOrLastName(searchedName);
+        AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Student student = (Student) studentListView.getItemAtPosition(position);
 
-                    if (allStudents == null){
-                        textFieldResult.setText("no result:");
-                    }
+                String lastname = student.getLast_name();
+                String firstname = student.getFirst_name();
 
-                    else {
-                        btnBrowseStudentsClickedSearchForName((searchedName));
-                        textFieldResult.setText("");
-                        mEditTextFieldUsedAsSearchfieldMainView.setText("");
-                    }
-
-                } else {
-                    textFieldResult.setText("please enter search term:");
-                }
-
+                Intent intent = new Intent(MainActivity.this, StudentView.class);
+                String Sendung = "stdView";
+                intent.putExtra("lastname", lastname);
+                intent.putExtra("firstname", firstname);
+                startActivity(intent);
             }
-        });
-
+        };
+        studentListView.setOnItemClickListener(mMessageClickedHandler);
 
         // init text of editTextField
-        mEditTextFieldUsedAsSearchfieldMainView = (EditText)findViewById(R.id.fieldEditText);
+        mEditTextFieldUsedAsSearchfieldMainView   = (EditText)findViewById(R.id.fieldEditText);
         mEditTextFieldUsedAsSearchfieldMainView.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -128,45 +92,73 @@ public class MainActivity extends AppCompatActivity
             {
                 // just to get rid of the text when clicked on
                 mEditTextFieldUsedAsSearchfieldMainView.setText("");
-                // toDO
-                //EditText Field will "always" delete content on click.
-                //When text already added, edit function should start to
-                //change the entered word
-            }
+
+                // change text of searchbutton
+                btnSearch.setText("clear");
+             }
         });
 
 
+        btnSearch = (Button) findViewById(R.id.btnSearch);
+        btnSearch.setText("Search");
+        btnSearch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                btnSearch.setText("clear");
+                btnSearch.setBackgroundResource(R.drawable.button_type2);
+                String searchedName = (mEditTextFieldUsedAsSearchfieldMainView.getText().toString());
+                searchedName = ("%" + searchedName + "%");
 
+                if (mEditTextFieldUsedAsSearchfieldMainView.getText().toString().length() > 0){
+                // for checking in search returned students
+                    ArrayList<Student> searchResults = searchStudentsFromDatabaseByFirstnameOrLastname(searchedName);
+                    if (searchResults == null){
+                        Toast t = Toast.makeText(MainActivity.this, R.string.toast_noresults, Toast.LENGTH_SHORT);
+                        t.show();
+
+                    }
+
+                    else {
+                        ArrayListAdapter adapter = new ArrayListAdapter(MainActivity.this, searchResults);
+                        studentListView.setAdapter(adapter);
+                        }
+
+                } else {
+                    Toast t = Toast.makeText(MainActivity.this, R.string.toast_pleaseenter, Toast.LENGTH_SHORT);
+                    t.show();
+                }
+
+            }
+        });
     }
-    // putExtra will send additional data to the intent (view)
-    // Button1 Standard
-    public void btnBrowseStudentsClicked()
+
+
+    public ArrayList<Student> readStudentsAllFromDatabase()
     {
-        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String  [] Sendung = {"stdView","empty"};
-        intent.putExtra("Sendung", Sendung);
-        startActivity(intent);
+        ArrayList<Student> studentsArrayList = new ArrayList<Student>();
+
+        studentsArrayList = helper.getStudentList();
+
+        return studentsArrayList;
     }
 
-    // putExtra will send additional data to the intent (view)
-    // Button2 Funky
-    public void btnBrowseStudentsClickedFunky()
+
+    public ArrayList<Student> searchStudentsFromDatabaseByFirstnameOrLastname(String searchName)
     {
-        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String  [] Sendung = {"funkyView","empty"};
-        intent.putExtra("Sendung", Sendung);
-        startActivity(intent);
+        ArrayList<Student> studentsArrayList = new ArrayList<Student>();
 
+        // when putExtra is nameSearch call method findByFirstName
+        studentsArrayList = helper.getSearchResultForFirstOrLastName(searchName);
+
+
+        return studentsArrayList;
     }
 
-    // putExtra will send additional data to the intent (view)
-    // Search Button in Std View
-    public void btnBrowseStudentsClickedSearchForName(String searchedName)
-    {
-        Intent intent = new Intent(MainActivity.this, BrowseStudents.class);
-        String[] Sendung = {"nameSearch", searchedName};
-        intent.putExtra("Sendung", Sendung);
-        startActivity(intent);
 
-    }
+
+
+
+
 }

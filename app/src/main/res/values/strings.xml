@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyStudentDB</string>
+    <string name="toast_noresults">no result</string>
+    <string name="toast_pleaseenter">please enter search term</string>
 </resources>
