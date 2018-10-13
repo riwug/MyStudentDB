@@ -19,7 +19,7 @@ public class Student
     private String last_name;
 
     @ColumnInfo(name = "instrument")
-    private Instrument instrument;
+    private String instrument;
 
     @ColumnInfo(name = "contact")
     private String contact;
@@ -61,15 +61,10 @@ public class Student
         this.contact = contact;
     }
 
-    public String getInstrument() { return instrument.name(); }
+    public String getInstrument() { return instrument; }
 
     public void setInstrument(String instrument) {
-        if(instrument.equalsIgnoreCase("Piano")) this.instrument = Instrument.Piano;
-        if(instrument.equalsIgnoreCase("Guitar")) this.instrument = Instrument.Guitar;
-        if(instrument.equalsIgnoreCase("Drums")) this.instrument = Instrument.Drums;
-        if(instrument.equalsIgnoreCase("Violin")) this.instrument = Instrument.Violin;
-        if(instrument.equalsIgnoreCase("Flute")) this.instrument = Instrument.Flute;
-        if(instrument.equalsIgnoreCase("Other")) this.instrument = Instrument.Other;
+        this.instrument = instrument;
     }
 
     public String getTimestampOnCreate() {return timestampOnCreate;}
